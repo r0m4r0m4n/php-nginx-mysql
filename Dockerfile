@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libpng-dev \
         git \
+    && docker-php-ext-install pdo pdo_mysql
 
-    && docker-php-ext-install pdo pdo_mysql apc
 RUN pecl install apcu
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
