@@ -23,7 +23,7 @@ RUN composer install
 
 
 # Copy existing application directory contents
-COPY ../test-master /var/app
+COPY . /var/app
 
 
 # Expose port 9000 and start php-fpm server
