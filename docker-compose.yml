@@ -14,7 +14,7 @@ services:
       - DATABASE_DSN=${DATABASE_DSN}
     working_dir: /var/app
     depends_on:
-      - db
+      - mysql
 
   #Nginx Service
   nginx:
@@ -29,7 +29,7 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - php
-      - mysqldb
+      - mysql
   #MySQL Service
   mysql:
     image: mysql
@@ -43,7 +43,6 @@ services:
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
     ports:
       - "3306:3306"
-
     volumes:
       - dbdata:/var/lib/mysql
 
