@@ -25,7 +25,7 @@ RUN composer install
 # Copy existing application directory contents
 COPY /app /var/app
 
-
+RUN php ./migrations/01_init.php
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
