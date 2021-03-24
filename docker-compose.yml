@@ -4,7 +4,7 @@ services:
   #PHP Service
   php:
     build:
-      context: ./php/
+      context: ./
       dockerfile: Dockerfile
     container_name: php
     restart: unless-stopped
