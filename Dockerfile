@@ -1,5 +1,5 @@
 FROM php:7.3-fpm
-COPY composer.json /var/app/
+COPY /app/composer.json /var/app/
 
 # Set working directory
 WORKDIR /var/app
@@ -23,7 +23,7 @@ RUN composer install
 
 
 # Copy existing application directory contents
-COPY . /var/app
+COPY /app /var/app
 
 
 # Expose port 9000 and start php-fpm server

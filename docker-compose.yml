@@ -11,6 +11,8 @@ services:
     env_file:
       - .env
     environment:
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_DSN=${DATABASE_DSN}
     working_dir: /var/app
     depends_on:
