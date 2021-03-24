@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
-        git \
+        git php7.3-apcu\
+
     && docker-php-ext-install pdo pdo_mysql apc
 
 # Clear cache
