@@ -1,5 +1,5 @@
 FROM php:7.3-fpm
-COPY ../test-master/composer.json /var/app/
+COPY composer.json /var/app/
 
 # Set working directory
 WORKDIR /var/app
@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
-        git \
-    && docker-php-ext-install pdo pdo_mysql
+        git apc\
+    && docker-php-ext-install pdo pdo_mysql apc
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
