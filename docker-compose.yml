@@ -6,42 +6,44 @@ services:
     build:
       context: ./php/
       dockerfile: Dockerfile
-    image: bitnami/php-fpm
-    container_name: app
+    container_name: php
     restart: unless-stopped
-    tty: true
+    env_file:
+      - .env
     environment:
-      DATABASE_DSN: $DATABASE_DSN
-      DATABASE_USERNAME: $DATABASE_USERNAME
-      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      - DATABASE_DSN=${DATABASE_DSN}
     working_dir: /var/app
+    depends_on:
+      - db
 
   #Nginx Service
-  webserver:
+  nginx:
     image: nginx:alpine
     container_name: nginx
     restart: unless-stopped
-    tty: true
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./:/var/app
       - ./nginx/conf.d/:/etc/nginx/conf.d/
-
+    depends_on:
+      - php
+      - mysqldb
   #MySQL Service
-  db:
+  mysql:
     image: mysql
     container_name: mysql
     restart: unless-stopped
-    tty: true
+    env_file:
+      - .env
+    environment:
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_DATABASE: $DATABASE_NAME
-      MYSQL_ROOT_PASSWORD: your_mysql_root_password
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+
     volumes:
       - dbdata:/var/lib/mysql
 
