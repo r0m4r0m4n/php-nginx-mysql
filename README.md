@@ -2,6 +2,8 @@
 - php7.3  
 - pdo, pdo-mysql
 - composer
+- APC
+- mysql 8
 
 ### Конфигурация БД
 Для подключения к БД используются следующие переменные окружения:  
@@ -21,6 +23,11 @@ DATABASE_PASSWORD - пароль
 
 Для инициализации БД необходимо выполнить команду  
 `php ./migrations/01_init.php`
+
+### Проверка
+GET /user/1
+GET /metrics
+GET /health
 
 
 ### Задание 1
