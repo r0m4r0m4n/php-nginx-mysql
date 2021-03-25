@@ -1,0 +1,9 @@
+FROM php:7.3
+COPY . /var/app
+
+WORKDIR /var/app
+ARG DATABASE_DSN=mysql:host=mysql;dbname=mysql
+ARG DATABASE_USERNAME=root
+ARG DATABASE_PASSWORD=rootroot
+RUN env
+CMD ["php", "./migrations/01_init.php"]
