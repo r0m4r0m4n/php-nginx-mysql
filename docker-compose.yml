@@ -11,9 +11,9 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_USERNAME=${DATABASE_USERNAME}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_DSN=${DATABASE_DSN}
+            - DATABASE_USERNAME:root
+            - DATABASE_PASSWORD:rootroot
+            - DATABASE_DSN:mysql://mysql:3306/test-db
     working_dir: /var/app
     depends_on:
       - mysql
