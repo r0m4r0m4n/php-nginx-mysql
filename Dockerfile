@@ -1,5 +1,5 @@
 FROM php:7.3-fpm
-COPY /app/composer.json /var/app/
+COPY /composer.json /var/app/
 
 # Set working directory
 WORKDIR /var/app
