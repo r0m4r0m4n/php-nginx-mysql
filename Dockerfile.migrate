@@ -1,11 +1,9 @@
 FROM php:7.3-fpm
 COPY . /var/app/
-WORKDIR /var/app
+WORKDIR /var/app/web
+RUN apt-get update && apt-get install -y git
+RUN docker-php-ext-install pdo pdo_mysql
 RUN curl -sS http://getcomposer.org/installer | php -- --filename=composer && chmod a+x composer  && mv composer /usr/local/bin/composer
 RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
-RUN composer install
-ARG DATABASE_DSN=mysql:host=mysql;dbname=mysql
-ARG DATABASE_USERNAME=root
-ARG DATABASE_PASSWORD=rootroot
-RUN env
+RUN composer update 
 CMD ["php", "./migrations/01_init.php"]

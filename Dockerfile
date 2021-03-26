@@ -5,18 +5,14 @@ COPY ./web/composer.json /var/app/
 WORKDIR /var/app
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-        git 
+RUN apt-get update && apt-get install -y git 
 RUN pecl install apcu 
-RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini
+#RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini
 RUN docker-php-ext-install pdo pdo_mysql 
+RUN docker-php-ext-enable pdo pdo_mysql apcu
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN echo "memory_limit = -1" > /usr/local/etc/php/conf.d/memory_limit.ini
 RUN curl -sS http://getcomposer.org/installer | php -- --filename=composer && chmod a+x composer  && mv composer /usr/local/bin/composer
 RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
 RUN composer install
