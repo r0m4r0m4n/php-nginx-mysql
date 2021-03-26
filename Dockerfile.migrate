@@ -1,7 +1,9 @@
-FROM php:7.3
-COPY . /var/app
-
+FROM php:7.3-fpm
+COPY . /var/app/
 WORKDIR /var/app
+RUN curl -sS http://getcomposer.org/installer | php -- --filename=composer && chmod a+x composer  && mv composer /usr/local/bin/composer
+RUN echo 'export PATH=~/.composer/vendor/bin:$PATH' >> ~/.bashrc
+RUN composer install
 ARG DATABASE_DSN=mysql:host=mysql;dbname=mysql
 ARG DATABASE_USERNAME=root
 ARG DATABASE_PASSWORD=rootroot
