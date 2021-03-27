@@ -1,5 +1,5 @@
 <?php
-
+phpinfo();exit();
 use Slim\Factory\AppFactory;
 use App\Db;
 use Prometheus\CollectorRegistry;
